@@ -1,0 +1,597 @@
+<html>
+<head>
+
+	<script type="text/javascript">
+	var mouseupindicator=-1;
+	var password=[];
+	var prevX,prevY;
+	var elementsDeleted=0;
+
+   function test(){
+   	//alert("wwo");
+   }
+
+window.addEventListener('load', function(){
+
+
+document.getElementById("mainelement").addEventListener('touchstart', function(e){
+ 
+ mousedown();
+
+ }, false)
+
+document.getElementById("0").addEventListener('touchmove', function(e){
+ changeImage(0,0,0);
+  e.preventDefault() // prevent default click behavior
+ }, false)
+document.getElementById("1").addEventListener('touchmove', function(e){
+ changeImage(1,0,1);
+  e.preventDefault() // prevent default click behavior
+ }, false)
+
+document.getElementById("2").addEventListener('touchmove', function(e){
+ //alert("woww1");
+ changeImage(2,0,2);
+  e.preventDefault() // prevent default click behavior
+ }, false)
+document.getElementById("3").addEventListener('touchmove', function(e){
+ changeImage(3,1,0);
+  e.preventDefault() // prevent default click behavior
+ }, false)
+document.getElementById("4").addEventListener('touchmove', function(e){
+ changeImage(4,1,1);
+  e.preventDefault() // prevent default click behavior
+ }, false)
+document.getElementById("5").addEventListener('touchmove', function(e){
+ //alert("woww1");
+ changeImage(5,1,2);
+  e.preventDefault() // prevent default click behavior
+ }, false)
+document.getElementById("6").addEventListener('touchmove', function(e){
+ changeImage(6,2,0);
+  e.preventDefault() // prevent default click behavior
+ }, false)
+document.getElementById("7").addEventListener('touchmove', function(e){
+ changeImage(7,2,1);
+  e.preventDefault() // prevent default click behavior
+ }, false)
+document.getElementById("8").addEventListener('touchmove', function(e){
+ //alert("woww1");
+ changeImage(8,2,2);
+  e.preventDefault() // prevent default click behavior
+ }, false)
+
+
+
+
+})
+
+
+function changeImage(id,xcoordinate,ycoordinate){
+//
+//console.log("this is id"+id);
+if(mouseupindicator==0){
+
+if(password.indexOf(id)==-1){
+document.getElementById(id).style.backgroundImage = 'url("d2.jpg")';
+//alert("prev x"+prevX+"prevy "+prevY);
+//alert("current x"+xcoordinate+"currenty "+ycoordinate);
+
+//alert("wowwcimmust");
+password.push(id);
+drawLine(xcoordinate,ycoordinate,prevX,prevY);
+
+prevX=xcoordinate;
+prevY=ycoordinate;
+}
+
+}
+}
+function drawweirdline1(xcoordinatepassed,ycoordinatepassed,prevxpassed,prevypassed){
+var iDiv = document.createElement('div');
+iDiv.className = 'weird1';
+
+if(prevypassed<ycoordinatepassed)
+iDiv.style.top = -13+110*((prevxpassed-1)>=0?(prevxpassed-1):prevxpassed);
+else
+iDiv.style.top = -13+110*((prevxpassed)>=0?(prevxpassed):0);
+
+iDiv.style.left =163;
+document.getElementById('mainelement').appendChild(iDiv);
+}
+
+function drawweirdline2(xcoordinatepassed,ycoordinatepassed,prevxpassed,prevypassed){
+var iDiv = document.createElement('div');
+iDiv.className = 'weird2';
+
+if(prevypassed>ycoordinatepassed)
+iDiv.style.top = -13+110*((prevxpassed-1)>=0?(prevxpassed-1):prevxpassed);
+else
+iDiv.style.top = -13+110*((prevxpassed)>=0?(prevxpassed):0);
+
+iDiv.style.left =163;
+document.getElementById('mainelement').appendChild(iDiv);
+
+}
+
+
+function drawweirdline3(xcoordinatepassed,ycoordinatepassed,prevxpassed,prevypassed){
+var iDiv = document.createElement('div');
+iDiv.className = 'weird3';
+//prevy<currenty
+if(prevxpassed>xcoordinatepassed){
+iDiv.style.left =109+110*((prevypassed-1)>=0?(prevypassed-1):prevypassed);
+}
+else{
+iDiv.style.left =109+110*((prevypassed)>=0?(prevypassed):0);
+}
+
+iDiv.style.top = 43;
+document.getElementById('mainelement').appendChild(iDiv);
+
+}
+
+
+function drawweirdline4(xcoordinatepassed,ycoordinatepassed,prevxpassed,prevypassed){
+var iDiv = document.createElement('div');
+iDiv.className = 'weird4';
+
+//prevy>currenty
+if(prevxpassed<xcoordinatepassed){
+iDiv.style.left =109+110*((prevypassed-1)>=0?(prevypassed-1):prevypassed);
+}
+else{
+ iDiv.style.left =109+110*((prevypassed)>=0?(prevypassed):0);
+}
+
+
+iDiv.style.top = 43;
+document.getElementById('mainelement').appendChild(iDiv);
+
+}
+
+
+
+function drawverticalline(xcoordinatetodraw,ycoordinatetodraw,prevxpassedtodraw,prevypassedtodraw){
+var iDiv = document.createElement('div');
+iDiv.className = 'vertical';
+if(prevxpassedtodraw<xcoordinatetodraw){
+
+iDiv.style.top = 55+110*prevxpassedtodraw;
+}
+else
+{
+if(Math.abs(prevxpassedtodraw-xcoordinatetodraw)>1){
+iDiv.style.top =55 +110*(prevxpassedtodraw-2);
+}
+else{
+iDiv.style.top = 55+110*(prevxpassedtodraw-1);
+}
+}
+  iDiv.style.left =54 +110*(prevypassedtodraw);
+if(Math.abs(prevxpassedtodraw-xcoordinatetodraw)>1){
+  iDiv.style.height+=(Math.abs(prevxpassedtodraw-xcoordinatetodraw))*110;
+}
+document.getElementById('mainelement').appendChild(iDiv);
+}
+
+function drawhorizontalline(xcoordinatetodraw,ycoordinatetodraw,prevxpassedtodraw,prevypassedtodraw){
+var iDiv = document.createElement('div');
+iDiv.className = 'horizontal';
+if(prevypassedtodraw<ycoordinatetodraw){
+iDiv.style.left =54 +110*prevypassedtodraw;
+}
+else
+{
+  if(Math.abs(prevypassedtodraw-ycoordinatetodraw)>1){
+iDiv.style.left =54 +110*(prevypassedtodraw-2);
+}
+  else{
+	iDiv.style.left =54 +110*(prevypassedtodraw-1);
+}
+}
+
+if(Math.abs(prevypassedtodraw-ycoordinatetodraw)>1){
+  iDiv.style.width+=(Math.abs(prevypassedtodraw-ycoordinatetodraw))*110;
+}
+
+iDiv.style.top = 55+110*prevxpassedtodraw;
+document.getElementById('mainelement').appendChild(iDiv);	
+}
+
+function drawpositivediagonalline(xcoordinatetodraw,ycoordinatetodraw,prevxpassedtodraw,prevypassedtodraw){
+	var iDiv = document.createElement('div');
+iDiv.className = 'diagonal1';
+console.log("dianglonbal1");
+if(ycoordinatetodraw>prevypassedtodraw){
+
+iDiv.style.left =110+(prevypassedtodraw)*110 ;
+iDiv.style.top = 32+(prevxpassedtodraw-1)*110;
+
+}
+else{
+
+iDiv.style.left =110+(prevypassedtodraw-1)*110 ;
+iDiv.style.top = 32+(prevxpassedtodraw)*110;	
+
+}
+
+if(Math.abs(prevxpassedtodraw-xcoordinatetodraw)>1){
+  iDiv.style.height=156*(Math.abs(prevxpassedtodraw-xcoordinatetodraw));
+  iDiv.style.top=10;
+  iDiv.style.left=165;
+}
+
+
+//iDiv.style.top+=(Math.abs(prevxpassedtodraw-xcoordinatetodraw)-2);
+//iDiv.style.left+=(Math.abs(prevxpassedtodraw-xcoordinatetodraw)-2);
+
+
+
+
+document.getElementById('mainelement').appendChild(iDiv);
+}
+
+
+function drawnegativediagonalline(xcoordinatetodraw,ycoordinatetodraw,prevxpassedtodraw,prevypassedtodraw){
+	var iDiv = document.createElement('div');
+iDiv.className = 'diagonal2';
+if(ycoordinatetodraw>prevypassedtodraw){
+iDiv.style.left =110+(prevypassedtodraw)*110 ;
+iDiv.style.top = 32+(prevxpassedtodraw)*110;
+}
+else{
+iDiv.style.left =110+(prevypassedtodraw-1)*110 ;
+iDiv.style.top = 32+(prevxpassedtodraw-1)*110;	
+}
+
+
+if(Math.abs(prevxpassedtodraw-xcoordinatetodraw)>1){
+  iDiv.style.height=156*(Math.abs(prevxpassedtodraw-xcoordinatetodraw));
+  iDiv.style.top=10;
+  iDiv.style.left=165;
+}
+
+document.getElementById('mainelement').appendChild(iDiv);
+}
+
+function drawLine(xcoordinatepassed,ycoordinatepassed,prevxpassed,prevypassed){
+if((prevxpassed-xcoordinatepassed)==0){
+drawhorizontalline(xcoordinatepassed,ycoordinatepassed,prevxpassed,prevypassed);
+}
+else if((prevypassed-ycoordinatepassed)==0){
+drawverticalline(xcoordinatepassed,ycoordinatepassed,prevxpassed,prevypassed);
+	//We have vertical line
+}
+//positive i.e. weird1
+else if(((prevypassed-ycoordinatepassed)/(prevxpassed-xcoordinatepassed))==-2){
+drawweirdline1(xcoordinatepassed,ycoordinatepassed,prevxpassed,prevypassed);
+}
+else if(((prevypassed-ycoordinatepassed)/(prevxpassed-xcoordinatepassed))==2){
+drawweirdline2(xcoordinatepassed,ycoordinatepassed,prevxpassed,prevypassed);
+}
+//weird3
+else if(((prevypassed-ycoordinatepassed)/(prevxpassed-xcoordinatepassed))==0.5){
+drawweirdline3(xcoordinatepassed,ycoordinatepassed,prevxpassed,prevypassed);
+}
+//weird4
+else if(((prevypassed-ycoordinatepassed)/(prevxpassed-xcoordinatepassed))==-0.5){
+drawweirdline4(xcoordinatepassed,ycoordinatepassed,prevxpassed,prevypassed);
+}
+else{
+var angle=Math.round((Math.atan2((prevypassed-ycoordinatepassed),(prevxpassed-xcoordinatepassed)))*(180/Math.PI));
+if(angle==-45 || angle==135){
+	drawpositivediagonalline(xcoordinatepassed,ycoordinatepassed,prevxpassed,prevypassed);
+	//We have positive diagonal line
+}
+else if(angle==-135 || angle==45){
+	drawnegativediagonalline(xcoordinatepassed,ycoordinatepassed,prevxpassed,prevypassed);
+	//We have negative diagonal line
+}
+}
+}
+
+
+
+function mousedown(){
+mouseupindicator=0;
+}
+ 
+
+
+function resetAllButtons(){
+var cells = document.getElementById("mainelement").getElementsByTagName("div");
+var len = cells.length;
+//console.log("this is len"+len);
+var deletedRecord=0;
+for(var i = 0; i < len; i++) {
+	if(cells[i]!==undefined){
+    
+    if(cells[i].className.toLowerCase() === "vertical"|| cells[i].className.toLowerCase() === "horizontal" || cells[i].className.toLowerCase() === "diagonal1" ||cells[i].className.toLowerCase() === "diagonal2" || cells[i].className.toLowerCase() === "weird1" || cells[i].className.toLowerCase() === "weird2"|| cells[i].className.toLowerCase() === "weird3" || cells[i].className.toLowerCase() === "weird4") {
+        deletedRecord++;
+        cells[i].parentNode.removeChild(cells[i]);
+    }
+}
+}
+
+	for (var i =8; i >= 0; i--) {
+		document.getElementById(i).style.backgroundImage = 'url("d1.jpg")';
+	}
+	return deletedRecord;
+}
+function fillAllButtons(){
+	for (var i =8; i >= 0; i--) {
+		document.getElementById(i).style.backgroundImage = 'url("d2.jpg")';
+	}
+}
+
+
+
+
+function changeImageMouseDown(id,xcoordinate,ycoordinate){
+	//alert("wowmousedown");
+	if(mouseupindicator==0|| mouseupindicator==-1){
+document.getElementById(id).style.backgroundImage = 'url("d2.jpg")';		
+	prevX=xcoordinate;
+	prevY=ycoordinate;
+	password.push(id);
+	}
+}
+function sendRequest(str)
+{
+	console.log(str+" my love");
+	console.log(document.getElementById('username').value+ " my love ");
+if (str=="")
+  {
+  document.getElementById("txtHint").innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    resetAllButtons();
+    }
+  }
+xmlhttp.open("GET","storepass.php?q="+str+"&username="+document.getElementById("username").value,true);
+xmlhttp.send();
+}
+
+function mouseup(){
+mouseupindicator=1;
+
+if(password.length>1)
+sendRequest(password.join(""));
+
+console.log("getting***"+password.join(""));
+
+for(var i=0;i<3;i++){
+  resetAllButtons();
+}
+//alert("done");
+//console.log("second "+elementsDeleted);
+//elementsDeleted=resetAllButtons();
+console.log("elem deletde "+elementsDeleted);
+console.log("length pas"+password.length);
+//alert("outside");
+var loopcontroller;
+if(password.length>1){
+//while(elementsDeleted!=password.length-1){
+	console.log("deleting");
+	//elementsDeleted+=resetAllButtons();
+//if(loopcontroller++>20)
+ // {
+//password=[];
+//break;
+  //}
+console.log("haha"+elementsDeleted);
+//}
+}
+
+//resetAllButtons();
+//resetAllButtons();
+//console.log("up mouse");
+console.log("lollll");
+
+
+//alert("done");
+//if(password.length>0)
+//alert("Your Pssscode is --> "+ password.join(""));
+console.log(password);
+password.length=0;
+
+mouseupindicator=-1;
+elementsDeleted=0;
+//document.getElementById(id).style.backgroundImage = 'url("d2.jpg")';
+}
+
+	</script>
+<style type="text/css">
+#txtHint{
+          font-size: 22px;
+          color: #344251;
+          text-shadow: 0px 0px 0px #bad3ed;
+          font-weight: bold;
+          width: 500px;
+}
+
+div.container {
+  position:absolute;
+     width:330px;
+     height:300px;
+     z-index:15;
+     top:40%;
+     left:50%;
+     margin:-100px 0 0 -150px;
+}
+
+div.left, div.right {
+ float: left;
+ padding: 10px;    
+height: 10px;
+width: 10px;
+margin:40px;
+}
+
+.horizontal{
+position: absolute;
+height: 1px;
+width: 110px;
+background-color: white;
+left: 55px;
+top: 54px;
+
+}
+
+.vertical{
+left: 54px;
+top: 55px;
+position: absolute;
+height: 110px;
+width: 1px;
+background-color: white;
+
+}
+
+.userinputfields{
+	position: absolute;
+width: 300px;
+height: 50px;
+color: white;
+top:75%;
+     left:45%;
+margin-left: auto;
+margin-right: auto;
+margin-top: 70px;
+}
+.diagonal1{
+transform: rotate(45deg);
+-ms-transform: rotate(45deg); /* IE 9 */
+-webkit-transform: rotate(45deg); /* Safari and Chrome */
+position: absolute;
+height: 156px;
+width: 1px;
+background-color: white;
+left: 110px;
+top: 32px;
+}
+
+.diagonal2{
+transform: rotate(-45deg);
+-ms-transform: rotate(-45deg); /* IE 9 */
+-webkit-transform: rotate(-45deg); /* Safari and Chrome */
+position: absolute;
+height: 156px;
+width: 1px;
+background-color: white;
+left: 110px;
+top: 32px;
+}
+
+.weird1{
+transform: rotate(-296.5deg);
+-ms-transform: rotate(-296.5deg);
+-webkit-transform: rotate(-296.5deg); 
+position: absolute;
+height: 246px;
+width: 1px;
+background-color: white;
+left: 163px;
+top: -13px;
+}
+
+.weird2{
+transform: rotate(296.5deg);
+-ms-transform: rotate(296.5deg);
+-webkit-transform: rotate(296.5deg); 
+position: absolute;
+height: 246px;
+width: 1px;
+background-color: white;
+left: 163px;
+top: -13px;
+}
+
+.weird3{
+transform: rotate(-26.5deg);
+-ms-transform: rotate(-26.5deg);
+-webkit-transform: rotate(-26.5deg); 
+position: absolute;
+height: 246px;
+width: 1px;
+background-color: white;
+left: 109px;
+top: 43px;
+}
+
+.weird4{
+transform: rotate(26.5deg);
+-ms-transform: rotate(26.5deg);
+-webkit-transform: rotate(26.5deg); 
+position: absolute;
+height: 246px;
+width: 1px;
+background-color: white;
+left: 109px;
+top: 43px;
+}
+
+
+div.left {
+ background-image:url('d1.jpg');    
+background-repeat: no-repeat;
+}
+div.right {
+  background-image:url('d1.jpg');    
+background-repeat: no-repeat;
+}
+.header{
+	position: relative;
+	left: 10%;
+	margin-top: auto;
+margin-bottom: 50px;
+	color:white;
+width: 1000px;
+height: 50px;
+
+}
+
+</style>
+</head>
+
+
+<body style="background-color:black">
+<div class='header'>Please Enter a pattern to record. This application only works on non-mobile devices. However, I am still working on adding touch support for this product. So, how it works?<br/>First time when you enter your username in the textbox, if it does not exists, it will create one and store your pattern. However, if username already exists in the back-end, it will by default check for authentication details in the database! Let me know app bug/ feature requests. Enjoy!</div>
+
+<div ondblclick="resetAllButtons()" onmousedown="mousedown()" ontouchstart="mousedown()"  onmouseup="mouseup()" ontouchcancel="mouseup()"    class="container" id="mainelement">
+
+    <div id="0"    onmousedown="changeImageMouseDown(this.id,0,0)"   onmouseover="changeImage(this.id,0,0)" class="left"></div>
+     
+     <div id="1"     onmousedown="changeImageMouseDown(this.id,0,1)" onmouseover="changeImage(this.id,0,1)" class="right"></div>
+    <div id="2"    onmousedown="changeImageMouseDown(this.id,0,2)" onmouseover="changeImage(this.id,0,2)" class="right"></div>
+    <br/><br/>
+    <div id="3"   onmousedown="changeImageMouseDown(this.id,1,0)" onmouseover="changeImage(this.id,1,0)" class="left"></div>
+     <div id="4"   onmousedown="changeImageMouseDown(this.id,1,1)" onmouseover="changeImage(this.id,1,1)" class="right"></div>
+    <div id="5"    onmousedown="changeImageMouseDown(this.id,1,2)" onmouseover="changeImage(this.id,1,2)" class="right"></div>
+    <br/><br/>
+    <div id="6"    onmousedown="changeImageMouseDown(this.id,2,0)" onmouseover="changeImage(this.id,2,0)" class="left"></div>
+     <div id="7"    onmousedown="changeImageMouseDown(this.id,2,1)" onmouseover="changeImage(this.id,2,1)" class="right"></div>
+    <div id="8"   onmousedown="changeImageMouseDown(this.id,2,2)" onmouseover="changeImage(this.id,2,2)" class="right"></div>
+
+</div>
+<div class='userinputfields' onmouseup="mouseup()">
+<div>Username: <input type='text' id='username'/></div>
+<br/>
+<div id='txtHint'>No Input</div>
+</div>
+</body>
+</html>
