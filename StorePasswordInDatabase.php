@@ -17,15 +17,18 @@ if ( $queryrun->num_rows > 0 ) {
                                 if ( !strcmp( $row['password'], $passwordProvider ) ) {
                                                 //Successful and unlock doors
                                                 echo "Welcome  " . $_GET['username'];
+                                                $row->close();
                                                 
-                                } //!strcmp( $row['password'], $passwordProvider )
+                                }
                                 else {
                                                 //failed authentication
                                                 echo "Username " . $_GET['username'] . " already exists. <br/> We checked it against existing Password and we got an authentication Failure";
                                                 
                                                 
                                 }
-                                $row->close();
+
+                                
+                                
                 } 
 } 
 
