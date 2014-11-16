@@ -10,6 +10,6 @@ First time when you enter your username in the textbox, if it does not exists, i
 Each bullet ranges from number 0-8 starting from top left corner (0) ending at bottom right corner (8). Your password is the sequence of pattern followed by user.
 
 You can view interactive demo at:
-http://www.jayeshkawli.com/jayeshkawli/canvas/passfield/PassField.html
+http://jayeshkawli.com/Canvas/JKPatternLock/PassField.html
 
 
