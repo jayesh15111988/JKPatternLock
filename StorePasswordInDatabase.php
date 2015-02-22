@@ -1,8 +1,10 @@
 <?php
 require_once( "db_info.php" );
 
-$userNameProvider = $mysqli->real_escape_string( $_GET['username'] );
-$passwordProvider = $mysqli->real_escape_string( $_GET['password'] );
+//echo $_GET['username']." ".$_GET['password'];
+
+$userNameProvider = $mysqli->real_escape_string($_GET['username']);
+$passwordProvider = $mysqli->real_escape_string($_GET['password']);
 
 $query = "select password from gesturepassword where username= '" . $userNameProvider . "'";
 
@@ -17,7 +19,7 @@ if ( $queryrun->num_rows > 0 ) {
                                 if ( !strcmp( $row['password'], $passwordProvider ) ) {
                                                 //Successful and unlock doors
                                                 echo "Welcome  " . $_GET['username'];
-                                                $row->close();
+                                                //$row->close();
                                                 
                                 }
                                 else {
